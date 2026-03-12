@@ -56,7 +56,29 @@ let mhs = {
   },
 };
 
+console.log(mhs.lulus);
 console.log(mhs.ipk());
+
+function buatObjectMahasiswa(nama, npm, jurusan) {
+  let mhs = {};
+  mhs.nama = nama;
+  mhs.npm = npm;
+  mhs.jurusan = jurusan;
+  return mhs;
+}
+
+let mahasiswa1 = buatObjectMahasiswa("dika", 15420913, "Informatika");
+console.log(mahasiswa1);
+
+// constructor
+function Mahasiswa(nama, npm, jurusan) {
+  this.nama = nama;
+  this.npm = npm;
+  this.jurusan = jurusan;
+}
+
+let mh1 = new Mahasiswa("dika", 15420913, "Informatika");
+console.log(mh1);
 
 // function ipk() {
 //   const { IPSemester } = mhs;
