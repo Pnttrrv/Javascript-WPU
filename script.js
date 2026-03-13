@@ -34,10 +34,23 @@ function Angkot(nama, trayek, kas, penumpang) {
           this.penumpang[i] = undefined;
           this.kas += bayar;
           return this.penumpang;
-        } else if (i == this.penumpang.length - 1) {
+        } else if (
+          namaPenumpang !=
+          penumpang.find(
+            (nama = function (e) {
+              return e == namaPenumpang;
+            }),
+          )
+        ) {
+          // kode ini digunakan untuk mencari penumpang menggunakan metode find
           console.log(`${namaPenumpang} tidak ada di dalam angkot!`);
-          return this.penumpang;
+          return penumpang;
         }
+        // kode yang dibawah untuk menacri penumpang menggunakan looping for yang ada di atas
+        // else if (i == this.penumpang.length - 1) {
+        //   console.log(`${namaPenumpang} tidak ada di dalam angkot!`);
+        //   return this.penumpang;
+        // }
       }
     }
   };
@@ -45,3 +58,12 @@ function Angkot(nama, trayek, kas, penumpang) {
 
 let angkot1 = new Angkot("Galih", ["sungai jawi", "penjara"], 0, []);
 console.log(angkot1);
+
+// let a = ["dia", "fahri", "indah", "juki"];
+// let b = a.find(
+//   (nilai = function (e) {
+//     if (e == "indah") {
+//       console.log(true);
+//     }
+//   }),
+// );
