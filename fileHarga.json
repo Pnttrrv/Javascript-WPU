@@ -1,0 +1,17 @@
+[
+  {
+    "namaProduk": "FF Full Cream",
+    "ukuran": "250ml",
+    "harga": 7500
+  },
+  {
+    "namaProduk": "Nescafe Ice Roast",
+    "ukuran": "20gr",
+    "harga": 14000
+  },
+  {
+    "namaProduk": "Kikoman Tiram",
+    "ukuran": "280ml",
+    "harga": 18500
+  }
+]

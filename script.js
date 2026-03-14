@@ -67,3 +67,12 @@ console.log(angkot1);
 //     }
 //   }),
 // );
+
+let pokeName;
+const fetchPoke = async (pokeName) => {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`);
+  const data = await response.json();
+  const { name, abilities } = data;
+  console.log(name);
+  console.log(abilities);
+};
