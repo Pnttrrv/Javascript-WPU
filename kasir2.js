@@ -27,6 +27,28 @@ function Kasir2(operator, produks, harga, kas) {
       }
     }
   };
+
+  this.hapusProduk = async (produk) => {
+    let totalProduk = this.produks;
+    let listHarga = this.harga;
+    const response = await fetch(`fileHarga.json`);
+    const data = await response.json();
+    if (totalProduk.length == 0) {
+      console.log(`Keranjang belanjaan masih kosong.`);
+      return totalProduk;
+    } else {
+      for (let i = 0; i < totalProduk.length; i++) {
+        if (totalProduk[i] === produk) {
+          totalProduk[i] = undefined;
+          listHarga[i] = undefined;
+          return totalProduk;
+        } else if (i == totalProduk.length - 1) {
+          console.log(`Produk tidak ada dalam keranjang belanjaan.`);
+          return totalProduk;
+        }
+      }
+    }
+  };
 }
 
 // catatan
