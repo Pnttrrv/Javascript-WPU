@@ -49,6 +49,34 @@ function Kasir2(operator, produks, harga, kas) {
       }
     }
   };
+
+  this.pembayaran = function (dana) {
+    let totalProduk = this.produks;
+    let listHarga = this.harga;
+    let total = listHarga.reduce((acc, jumlah) => {
+      return acc + jumlah;
+    }, 0);
+    if (listHarga.length == 0) {
+      console.log(`Keranjang belanjaan masih kosong.`);
+      return totalProduk;
+    } else {
+      if (dana > total) {
+        let temp = dana - total;
+        console.log(
+          `Total belanjaan sebesar ${total} dan kembalian sebesar ${temp}`,
+        );
+        return null;
+      } else if (dana < total) {
+        console.log(
+          `Total belanjaan sebesar ${total}, pembayaran kurang ${temp}`,
+        );
+        return null;
+      } else if (dana == total) {
+        console.log(`Total belanjaan sebesar ${total}, Lunas`);
+        return null;
+      }
+    }
+  };
 }
 
 // catatan

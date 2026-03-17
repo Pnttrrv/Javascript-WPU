@@ -4,14 +4,24 @@ function Kasir(operator, produks, harga, kas) {
   this.harga = harga;
   this.kas = kas;
 
-  this.tambahProduk = function (produk, harga) {
+  this.tambahProduk = async (produk) => {
+    const response = await fetch(`fileHarga.json`);
+    const data = await response.json();
+    // console.log(data);
     let totalProduk = this.produks;
     let listHarga = this.harga;
     if (totalProduk.length == 0) {
-      totalProduk.push(produk);
-      listHarga.push(harga);
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].namaProduk == produk) {
+          totalProduk.push(produk);
+          listHarga.push(harga);
 
-      return totalProduk;
+          return totalProduk;
+        } else {
+          console.log(`${produk} belum tersedia.`);
+          return totalProduk;
+        }
+      }
     } else {
       for (let i = 0; i < totalProduk.length; i++) {
         if (totalProduk[i] == undefined) {
