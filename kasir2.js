@@ -4,27 +4,58 @@ function Kasir2(operator, produks, harga, kas) {
   this.harga = harga;
   this.kas = kas;
 
+  // this.tambahProduk = async (produk) => {
+  //   const response = await fetch(`fileHarga.json`);
+  //   const data = await response.json();
+  //   let totalProduk = this.produks;
+  //   let listHarga = this.harga;
+  //   if (totalProduk.length == 0) {
+  //     for (let i = 0; i < data.length; i++) {
+  //       if (data[i].namaProduk == produk) {
+  //         totalProduk.push(produk);
+  //         listHarga.push(data[i].harga);
+  //         return totalProduk;
+  //       }
+  //     }
+  //   } else {
+  //     for (let i = 0; i < data.length; i++) {
+  //       if (data[i].namaProduk == produk) {
+  //         totalProduk.push(produk);
+  //         listHarga.push(data[i].harga);
+  //         return totalProduk;
+  //       }
+  //     }
+  //   }
+  // };
+
   this.tambahProduk = async (produk) => {
-    const response = await fetch(`fileHarga.json`);
-    const data = await response.json();
-    let totalProduk = this.produks;
-    let listHarga = this.harga;
-    if (totalProduk.length == 0) {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].namaProduk == produk) {
-          totalProduk.push(produk);
-          listHarga.push(data[i].harga);
-          return totalProduk;
-        }
+    try {
+      const response = await fetch(`fileHarga.json`);
+      const data = await response.json();
+      // produk yang dimasukkan diatas akan dicari di dalam file jason jadi misalkan diatas dimasukkan "air putih", jika air putih ada di dalam file json maka produkDitemukan akan berisi air putih
+      const produkDitemukan = data.find((item) => item.namaProduk === produk);
+
+      // melakukan cek apakah produkDitemukan kosong atau tidak, jika barang tidak ada di dalam file json maka produkDitemukan akan kosong
+      if (!produkDitemukan) {
+        console.log(`${produk} belum tersedia.`);
+        return;
       }
-    } else {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].namaProduk == produk) {
-          totalProduk.push(produk);
-          listHarga.push(data[i].harga);
-          return totalProduk;
-        }
+
+      // melakukan pencarian index yang memiliki value undefined di dalam array produks
+      const findUndefined = this.produks.indexOf(undefined);
+
+      // melakukan cek jika findUndefined tidak menemukan undefined pada array produks maka akan berisi -1 namun jika findUndefined menemukan value undefined pada index ke-2 maka block if findUndefined akan dijalankan
+      if (findUndefined !== -1) {
+        this.produks[findUndefined] = produkDitemukan.namaProduk;
+        this.harga[findUndefined] = produkDitemukan.harga;
+      } else {
+        this.produks.push(produkDitemukan.namaProduk);
+        this.harga.push(produkDitemukan.harga);
       }
+      return this.produks;
+    } catch (err) {
+      console.log(err);
+      return;
     }
   };
 
